@@ -44,7 +44,6 @@ if downloader.status('cmudict', downloader._get_download_dir()) != downloader.IN
 
 # Use NLTK's cmudict corpus, sorted by word length.
 entry_list = list(cmudict.entries())
-entry_list.sort(key=lambda entry: len(entry[0]), reverse=True)
 
 
 def is_syllable(phoneme: str) -> bool:
@@ -57,34 +56,47 @@ def nsyl(phonemes: list[str]) -> int:
     return len(list(filter(is_syllable, phonemes)))
 
 
-def print_syllable_counts(entries) -> None:
-    '''Prints each entry and its syllable count.'''
-    for entry in entries:
-        print(f'{entry[0]} has {nsyl(entry[1])} syllables(s).')
-
-
 def get_candidates(entry) -> list:
-    '''Gets a list of words which are one character longer, but one syllable shorter, than entry.'''
-    characters = len(entry[0])
-    syllables = nsyl(entry[1])
+    '''Gets a list of words which are one character longer, but one syllable shorter, than entry. O(n).'''
+    characters = entry[1]
+    syllables = entry[3]
     return list(filter(
-        lambda candidate: (len(candidate[0]) == characters + 1) and (nsyl(candidate[1]) == syllables - 1),
+        lambda candidate: (candidate[1] == characters + 1) and (candidate[3] == syllables - 1),
         entry_list
     ))
 
 
 def single_vowel_difference(a: str, b: str) -> bool:
-    '''Tests whether inserting a vowel into a results in b.'''
+    '''Tests whether removing 1 vowel from b results in a.'''
     for i in range(0, len(b)):
-        character: str = b[i]
-        if character in VOWELS:
-            if a == b[:i] + b[i+1:]:
-                return True
+        if b[i] in VOWELS and a == b[:i] + b[i+1:]:
+            return True
+
+
+for i in range(0, len(entry_list)):  # Count syllables for each entry. O(n).
+    '''Structure of entry is: (word, len(word), phonemes, nsyl(phonemes))'''
+    entry_list[i] = (entry_list[i][0], len(entry_list[i][0]), entry_list[i][1], nsyl(entry_list[i][1]))
+
+
+def main():
+    for entry in alive_it(entry_list):  # Test each entry. O(n^2).
+        if entry[0][:2] == 'ac':
+            return
+        for candidate in get_candidates(entry):
+            if single_vowel_difference(entry, candidate):
+                print(f'Found a solution: "{entry}" and "{candidate}"')
 
 
 if __name__ == "__main__":
-    for entry in alive_it(entry_list):
-        for candidate in get_candidates(entry):
-            if single_vowel_difference(entry, candidate):
-                print(entry)
-                print(candidate)
+    # From https://docs.python.org/3/library/profile.html#profile.Profile
+    import cProfile, pstats, io
+    from pstats import SortKey
+    pr = cProfile.Profile()
+    pr.enable()
+    main()
+    pr.disable()
+    s = io.StringIO()
+    sortby = SortKey.TIME
+    ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+    ps.print_stats(20)
+    print(s.getvalue())
