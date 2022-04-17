@@ -7,7 +7,7 @@ This week's [Riddler Express](https://fivethirtyeight.com/features/can-you-add-a
 <details>
 <summary>Spoiler warning, expand to see more!</summary>
 
-**TL;DR: "hire" to "haire" and "our" to "your".**
+**TL;DR: "ok" to "oak" and "our" to "your".**
 
 It turns out, [CMU Pronouncing Dictionary](https://www.nltk.org/_modules/nltk/corpus/reader/cmudict.html) contains many solutions to [this week's Riddler Express](https://fivethirtyeight.com/features/can-you-add-a-vowel-to-lose-a-syllable/).
 
@@ -20,14 +20,12 @@ Some debatable pronunciations:
 + fathering to feathering
 + fondling to foundling
 
-Some unusual but "standard" English words:
+Some unusual English words:
++ hire to haire
 + [beatify](https://en.wiktionary.org/wiki/beatify#English) to [beautify](https://en.wiktionary.org/wiki/beautify#English)
 
-Some pretty good answers up for debate:
-+ ok to oak
-
 And some truly good answers:
-+ hire to haire
++ ok to oak
 + our to your
 
 </details>
