@@ -80,8 +80,6 @@ for i in range(0, len(entry_list)):  # Count syllables for each entry. O(n).
 
 def main():
     for entry in alive_it(entry_list):  # Test each entry. O(n^2).
-        if entry[0][:2] == 'ac':
-            return
         for candidate in get_candidates(entry):
             if single_vowel_difference(entry, candidate):
                 print(f'Found a solution: "{entry}" and "{candidate}"')
