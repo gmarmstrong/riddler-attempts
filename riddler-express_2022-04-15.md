@@ -1,5 +1,9 @@
 # Solutions to the Riddler Express for April 15, 2022
 
+This week's [Riddler Express](https://fivethirtyeight.com/features/can-you-add-a-vowel-to-lose-a-syllable/):
+
+> Find a word in the English language to which you can add a vowel, resulting in another word that has fewer syllables.
+
 <details>
 <summary>Spoiler warning, expand to see more!</summary>
 
