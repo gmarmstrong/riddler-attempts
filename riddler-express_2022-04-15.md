@@ -5,7 +5,7 @@
 
 **TL;DR: "hire" to "haire" and "our" to "your".**
 
-It turns out, [CMU Pronouncing Dictionary](https://www.nltk.org/_modules/nltk/corpus/reader/cmudict.html) contains many solutions to this week's Riddler Express.
+It turns out, [CMU Pronouncing Dictionary](https://www.nltk.org/_modules/nltk/corpus/reader/cmudict.html) contains many solutions to [this week's Riddler Express](https://fivethirtyeight.com/features/can-you-add-a-vowel-to-lose-a-syllable/).
 
 We'll ignore the initialisms and abbreviations, which are unsatisfying answers (e.g., AC to ace, USS to uses, AM to aim). We'll also ignore personal names (e.g., Georgio to Georgiou, Antone to Antoine, Jefferis to Jefferies).
 
