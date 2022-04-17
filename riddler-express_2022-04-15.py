@@ -73,12 +73,10 @@ def single_vowel_difference(a: str, b: str) -> bool:
             return True
 
 
-for i in range(0, len(entry_list)):  # Count syllables for each entry. O(n).
-    '''Structure of entry is: (word, len(word), phonemes, nsyl(phonemes))'''
-    entry_list[i] = (entry_list[i][0], len(entry_list[i][0]), entry_list[i][1], nsyl(entry_list[i][1]))
-
-
 def main():
+    for i in range(0, len(entry_list)):  # Count syllables for each entry. O(n).
+        '''Structure of entry is: (word, len(word), phonemes, nsyl(phonemes))'''
+        entry_list[i] = (entry_list[i][0], len(entry_list[i][0]), entry_list[i][1], nsyl(entry_list[i][1]))
     for entry in alive_it(entry_list):  # Test each entry. O(n^2).
         for candidate in get_candidates(entry):
             if single_vowel_difference(entry, candidate):
