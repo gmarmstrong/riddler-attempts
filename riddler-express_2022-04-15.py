@@ -85,7 +85,7 @@ def main():
                 print(f'Found a solution: "{entry}" and "{candidate}"')
 
 
-if __name__ == "__main__":
+def profile_main():
     # From https://docs.python.org/3/library/profile.html#profile.Profile
     import cProfile, pstats, io
     from pstats import SortKey
@@ -94,7 +94,11 @@ if __name__ == "__main__":
     main()
     pr.disable()
     s = io.StringIO()
-    sortby = SortKey.TIME
+    sortby = SortKey.CUMULATIVE
     ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
     ps.print_stats(20)
     print(s.getvalue())
+
+
+if __name__ == "__main__":
+    main()
