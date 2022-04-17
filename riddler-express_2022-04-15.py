@@ -60,16 +60,14 @@ def get_candidates(entry) -> list:
     '''Gets a list of words which are one character longer, but one syllable shorter, than entry. O(n).'''
     characters = entry[1]
     syllables = entry[3]
-    return list(filter(
-        lambda candidate: (candidate[1] == characters + 1) and (candidate[3] == syllables - 1),
-        entry_list
-    ))
+    result = [ candidate for candidate in entry_list if (candidate[1] == characters + 1) and (candidate[3] == syllables - 1) ]
+    return result
 
 
 def single_vowel_difference(a: str, b: str) -> bool:
     '''Tests whether removing 1 vowel from b results in a.'''
     for i in range(0, len(b)):
-        if b[i] in VOWELS and a == b[:i] + b[i+1:]:
+        if b[i] in VOWELS_YW and a == b[:i] + b[i+1:]:
             return True
 
 
@@ -79,7 +77,7 @@ def main():
         entry_list[i] = (entry_list[i][0], len(entry_list[i][0]), entry_list[i][1], nsyl(entry_list[i][1]))
     for entry in alive_it(entry_list):  # Test each entry. O(n^2).
         for candidate in get_candidates(entry):
-            if single_vowel_difference(entry, candidate):
+            if single_vowel_difference(entry[0], candidate[0]):
                 print(f'Found a solution: "{entry}" and "{candidate}"')
 
 
