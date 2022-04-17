@@ -1,7 +1,9 @@
 import string
 
-import nltk
+from nltk.downloader import Downloader
 from nltk.corpus import cmudict
+
+from alive_progress import alive_it
 
 # Riddler Express for April 15, 2022. Article by Zach Wissner-Gross.
 # 
@@ -35,8 +37,12 @@ VOWELS      = ['a', 'e', 'i', 'o', 'u']
 VOWELS_Y    = ['a', 'e', 'i', 'o', 'u', 'y']
 VOWELS_YW   = ['a', 'e', 'i', 'o', 'u', 'y', 'w']
 
-# Use NLTK's cmudict corpus, sort by word length.
-nltk.download('cmudict')
+# Install NLTK's cmudict corpus
+downloader = Downloader()
+if downloader.status('cmudict', downloader._get_download_dir()) != downloader.INSTALLED:
+    downloader.download('cmudict')
+
+# Use NLTK's cmudict corpus, sorted by word length.
 entry_list = list(cmudict.entries())
 entry_list.sort(key=lambda entry: len(entry[0]), reverse=True)
 
@@ -77,7 +83,7 @@ def single_vowel_difference(a: str, b: str) -> bool:
 
 
 if __name__ == "__main__":
-    for entry in entry_list:
+    for entry in alive_it(entry_list):
         for candidate in get_candidates(entry):
             if single_vowel_difference(entry, candidate):
                 print(entry)
