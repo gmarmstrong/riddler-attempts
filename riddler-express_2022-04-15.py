@@ -42,7 +42,7 @@ downloader = Downloader()
 if downloader.status('cmudict', downloader._get_download_dir()) != downloader.INSTALLED:
     downloader.download('cmudict')
 
-# Use NLTK's cmudict corpus, sorted by word length.
+# Use NLTK's cmudict corpus
 entry_list = list(cmudict.entries())
 
 
@@ -75,7 +75,7 @@ def single_vowel_difference(a: str, b: str) -> bool:
 
 def main():
     for i in range(0, len(entry_list)):  # Count syllables for each entry. O(n).
-        '''Structure of entry is: (word, len(word), phonemes, nsyl(phonemes))'''
+        # Structure of entry is: (word, len(word), phonemes, nsyl(phonemes))
         entry_list[i] = (entry_list[i][0], len(entry_list[i][0]), entry_list[i][1], nsyl(entry_list[i][1]))
     for entry in alive_it(entry_list):  # Test each entry. O(n^2).
         for candidate in get_candidates(entry):
@@ -84,7 +84,11 @@ def main():
 
 
 def profile_main():
-    # From https://docs.python.org/3/library/profile.html#profile.Profile
+    '''Profiles the program to identify performance bottlenecks.
+    Will not provide feedback if interrupted, so a manual "breakpoint"
+    should be temporarily added to the main process (the line under
+    alive_it(entry_list) in main()) to end the run early.'''
+    # Adapted from https://docs.python.org/3/library/profile.html#profile.Profile
     import cProfile, pstats, io
     from pstats import SortKey
     pr = cProfile.Profile()
