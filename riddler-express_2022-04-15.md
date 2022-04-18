@@ -29,3 +29,7 @@ And some truly good answers:
 + our to your
 
 </details>
+
+Links:
++ [Source code](https://github.com/gmarmstrong/riddler-attempts/blob/master/riddler-express_2022-04-15.py)
++ [Program output](https://github.com/gmarmstrong/riddler-attempts/blob/master/riddler-express_2022-04-15_output.txt)
